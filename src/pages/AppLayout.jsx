@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router';
-
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 function AppLayout() {
   return (
-    <div>
-      <h1>applayout</h1>
+    <div className="grid grid-rows-[auto_1fr_auto] w-screen">
+      <Navbar />
       <Outlet />
+      <Footer />
     </div>
   );
 }

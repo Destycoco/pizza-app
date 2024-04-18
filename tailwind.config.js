@@ -10,6 +10,10 @@ export default {
         pizzaIngrd: ['Bad Script', 'cursive'],
         pizzaLarge2: ['Chewy', 'system-ui'],
       },
+      colors: {
+        pizzaRed: '#A10702',
+        pizzaOrange: '#FAA613',
+      },
     },
   },
   plugins: [],
