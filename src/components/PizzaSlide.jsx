@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PizzaLeft from './PizzaLeft';
-
+import { FaAngleUp } from 'react-icons/fa6';
+import { FaAngleDown } from 'react-icons/fa6';
 function PizzaSlide() {
   const pizzaList = [
     {
@@ -40,16 +41,26 @@ function PizzaSlide() {
     },
   ];
   const [activeId, setactiveId] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setactiveId((activeId) =>
+        activeId >= 4 ? (activeId = 0) : activeId + 1,
+      );
+    }, [3000]);
+    return () => clearInterval(timer);
+  }, [activeId]);
   return (
     <div className="bg-pizzaRed h-screen w-screen px-10 ">
       <div className="text-red-600 flex items-center bg-pizzaRed w-[100%]">
-        <div className="flex gap-3 flex-col w-[10%]">
+        <div className="flex gap-3 flex-col w-[10%]  ">
+          <FaAngleUp className="text-pizzaOrange text-xl" />
           {pizzaList.map((pizza, i) => (
             <h2
               key={pizza.id}
-              className="text-pizzaOrange font-bold"
+              className="text-pizzaOrange font-normal text-xl"
             >{`0${i + 1}`}</h2>
           ))}
+          <FaAngleDown className="text-pizzaOrange text-xl" />
         </div>
         <div className="w-[70%] m-auto">
           {pizzaList.map(
