@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from 'react-router';
 import Button from './Button';
 
 function PizzaLeft({ header, title, text, image }) {
+  const navigate = useNavigate();
   return (
-    <div className="flex border-2 gap-4 items-center text-center border-red-700">
-      <div className="basis-[50%] space-y-2">
+    <div className="flex gap-4 items-center text-center">
+      <div className="basis-[50%] space-y-3">
         <h1 className="font-normal text-pizzaOrange font-pizzaLarge2 text-6xl">
           {header}
         </h1>
@@ -12,13 +14,15 @@ function PizzaLeft({ header, title, text, image }) {
           {title}
         </h3>
         <p className="text-white w-[70%] text-xs font-normal m-auto">{text}</p>
-        <Button>Order Now</Button>
+        <Button type="primary" onClick={navigate('/menu')}>
+          Order Now
+        </Button>
       </div>
       <div className="basis-[50%] ">
         <img
           src={image}
           alt="pizza-image"
-          className="w-[80%] h-[25rem] border-green-700 border-2 aspect-[1]"
+          className="w-[80%] h-[25rem] aspect-[1]"
         />
       </div>
     </div>

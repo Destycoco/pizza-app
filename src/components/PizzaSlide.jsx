@@ -41,6 +41,9 @@ function PizzaSlide() {
     },
   ];
   const [activeId, setactiveId] = useState(0);
+  const handleNumber = (num) => {
+    setactiveId(num);
+  };
   useEffect(() => {
     const timer = setInterval(() => {
       setactiveId((activeId) =>
@@ -50,17 +53,32 @@ function PizzaSlide() {
     return () => clearInterval(timer);
   }, [activeId]);
   return (
-    <div className="bg-pizzaRed h-screen w-screen px-10 ">
-      <div className="text-red-600 flex items-center bg-pizzaRed w-[100%]">
-        <div className="flex gap-3 flex-col w-[10%]  ">
-          <FaAngleUp className="text-pizzaOrange text-xl" />
+    <div className="bg-pizzaRed w-screen px-10 py-10">
+      <div className="text-red-600 flex items-center bg-pizzaRed w-[100%] mb-4">
+        <div className="flex gap-3 flex-col items-center w-[2%] ">
+          <FaAngleUp
+            className="text-pizzaOrange text-xl cursor-pointer"
+            onClick={() =>
+              setactiveId((activeId) =>
+                activeId >= 4 ? (activeId = 0) : activeId + 1,
+              )
+            }
+          />
           {pizzaList.map((pizza, i) => (
             <h2
               key={pizza.id}
-              className="text-pizzaOrange font-normal text-xl"
+              className="text-pizzaOrange font-normal text-xl cursor-pointer hover:bg-pizzaOrange hover:font-bold hover:text-pizzaRed hover:rounded-[50%] hover:px-1"
+              onClick={() => handleNumber(pizza.id)}
             >{`0${i + 1}`}</h2>
           ))}
-          <FaAngleDown className="text-pizzaOrange text-xl" />
+          <FaAngleDown
+            className="text-pizzaOrange text-xl cursor-pointer"
+            onClick={() =>
+              setactiveId((activeId) =>
+                activeId <= 0 ? (activeId = 4) : activeId - 1,
+              )
+            }
+          />
         </div>
         <div className="w-[70%] m-auto">
           {pizzaList.map(
@@ -68,6 +86,14 @@ function PizzaSlide() {
               pizza.id === activeId && <PizzaLeft {...pizza} key={pizza.id} />,
           )}
         </div>
+      </div>
+      <div className="flex gap-2 justify-center">
+        {pizzaList.map((pizza) => (
+          <p
+            key={pizza.id}
+            className={`${activeId === pizza.id ? 'bg-white' : ''} w-2 h-2 rounded-[50%] border-2 border-white`}
+          ></p>
+        ))}
       </div>
     </div>
   );
