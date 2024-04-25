@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router';
-import Button from './Button';
+import Button from '../Button';
 
-function PizzaLeft({ header, title, text, image }) {
+function PizzaPair({ header, title, text, image }) {
   const navigate = useNavigate();
   return (
     <div className="flex gap-4 items-center text-center">
@@ -29,4 +29,4 @@ function PizzaLeft({ header, title, text, image }) {
   );
 }
 
-export default PizzaLeft;
+export default PizzaPair;

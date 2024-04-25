@@ -10,15 +10,22 @@ const links = [
 
 function Navbar() {
   const [activeTab, setActiveTab] = useState('Home');
-  const [hoverTab, setHoverTab] = useState('Home');
+  const [hoverTab, setHoverTab] = useState('');
+
   const handleSetActive = (title) => {
     setActiveTab(title);
+    setHoverTab(title); // Ensure hoverTab is set when NavLink is active
   };
+
   const handleSetHover = (title) => {
-    setHoverTab(title);
+    if (activeTab !== title) {
+      setHoverTab(title);
+      // setActiveTab(null);
+    }
   };
+
   return (
-    <div className="w-screen bg-pizzaOrange font-pizzaLarge  py-8 ">
+    <div className="w-screen bg-pizzaOrange font-pizzaLarge py-8">
       <div className="flex justify-between w-[85%] m-auto items-center">
         <div className="flex space-x-2 items-center">
           <div className="w-[3rem]">
@@ -31,15 +38,14 @@ function Navbar() {
           <h1 className="text-pizzaRed text-5xl">9JA Pizza</h1>
         </div>
         <div>
-          <ul className="flex space-x-4 font-pizzaLarge2  ">
+          <ul className="flex space-x-4 font-pizzaLarge2">
             {links.map((link) => (
               <NavLink
                 to={link.route}
                 key={link.id}
                 onMouseEnter={() => handleSetHover(link.title)}
                 onMouseLeave={() => setHoverTab('')}
-                className={`${hoverTab ? hoverTab : activeTab === link.title ? 'text-pizzaRed' : ''} text-white hover:text-pizzaRed text-xl Class
-                transition duration-500 ease-in-out `}
+                className={`${hoverTab && hoverTab === link.title ? 'text-pizzaRed' : activeTab && activeTab === link.title ? 'text-pizzaRed' : 'text-white'} text-xl transition duration-500 ease-in-out`}
                 onClick={() => handleSetActive(link.title)}
               >
                 {link.title}

@@ -1,7 +1,7 @@
-import Blog from '../components/Blog';
-import PizzaSlide from '../components/PizzaSlide';
-import Reviews from '../components/Reviews';
-import Specialty from '../components/Specialty';
+import Blog from '../components/Blog/Blog';
+import PizzaSlide from '../components/PizzaHeader/PizzaSlide';
+import Reviews from '../components/Review/Reviews';
+import Specialty from '../components/Specialty/Specialty';
 
 function Homepage() {
   return (

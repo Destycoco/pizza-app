@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import PizzaLeft from './PizzaLeft';
 import { FaAngleUp } from 'react-icons/fa6';
 import { FaAngleDown } from 'react-icons/fa6';
+import PizzaPair from './PizzaPair';
 function PizzaSlide() {
   const pizzaList = [
     {
@@ -83,7 +83,7 @@ function PizzaSlide() {
         <div className="w-[70%] m-auto">
           {pizzaList.map(
             (pizza) =>
-              pizza.id === activeId && <PizzaLeft {...pizza} key={pizza.id} />,
+              pizza.id === activeId && <PizzaPair {...pizza} key={pizza.id} />,
           )}
         </div>
       </div>
