@@ -1,9 +1,27 @@
 /* eslint-disable react/prop-types */
 import { formatCurrency } from '../../utils';
-import Button from '../Button';
+import { addToCart } from '../../features/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import ToggleAmount from './ToggleAmount';
+
 function MenuItem({ id, imageUrl, ingredients, name, soldOut, unitPrice }) {
+  const isAdded = useSelector((store) =>
+    store.cart.cart.find((cart) => cart.pizzaId === id),
+  );
+
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    const newCart = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addToCart(newCart));
+  };
   return (
-    <div className="basis-[23%] flex flex-col justify-between border-2 border-green-600 relative">
+    <div className="basis-[23%] flex flex-col justify-between shadow-lg relative">
       <div
         className={`${soldOut ? 'grayscale' : ''} w-[100%] h-[60%] overflow-hidden `}
       >
@@ -22,11 +40,17 @@ function MenuItem({ id, imageUrl, ingredients, name, soldOut, unitPrice }) {
         <p>{formatCurrency(unitPrice)}</p>
       </div>
 
-      <button
-        className={`${soldOut ? 'disabled grayscale' : ''} rounded-md w-[100%] py-2 px-3 bg-pizzaOrange text-white hover:bg-pizzaRed `}
-      >
-        Add to Cart
-      </button>
+      {isAdded && !soldOut ? (
+        <ToggleAmount isAdded={isAdded} key={isAdded.pizzaId} />
+      ) : (
+        <button
+          className={`${soldOut ? 'grayscale' : ''} rounded-md w-[100%] py-2 px-3 bg-pizzaOrange text-white hover:bg-pizzaRed `}
+          disabled={soldOut}
+          onClick={handleAddToCart}
+        >
+          {soldOut ? 'Sold Out' : 'Add to Cart'}
+        </button>
+      )}
     </div>
   );
 }
