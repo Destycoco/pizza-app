@@ -25,7 +25,7 @@ function Specialty() {
   return (
     <div className="text-center py-8">
       <h2 className=" font-pizzaHeader text-3xl mb-8">Our 9JA Specialty</h2>
-      <div className="flex w-[80%] m-auto gap-6 border-2 border-green-700">
+      <div className="flex w-[80%] m-auto gap-6 ">
         {specialtyList.map((special) => (
           <SpecialItem key={special.id} {...special} />
         ))}

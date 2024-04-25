@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from './Button';
 
 /* eslint-disable react/prop-types */
-function SpecialItem({ header, text, image, id }) {
+function SpecialItem({ header, text, image }) {
   const [showFullText, setShowfullText] = useState(true);
   console.log('Original text:', text);
   const handleSetText = () => {
