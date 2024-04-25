@@ -24,3 +24,10 @@ export const useGetPizza = () => {
 
   return { menu, error, isLoading, getPizzaMenu };
 };
+
+export const formatCurrency = (cur) => {
+  return new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(cur);
+};

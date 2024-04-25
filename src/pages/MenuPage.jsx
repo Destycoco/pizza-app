@@ -10,13 +10,18 @@ function MenuPage() {
   }, [getPizzaMenu]);
   const menuData = menu.data;
   console.log(menuData);
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading) return <div className="h-[70vh]">Loading....</div>;
   if (error) return <div>Error: {}</div>;
   return (
-    <div>
-      {menuData?.map((pizza) => (
-        <MenuItem key={pizza.id} {...pizza} />
-      ))}
+    <div className="w-[80%] m-auto  py-10">
+      <h1 className="text-center font-pizzaHeader font-bold text-3xl mb-6">
+        OUR MENU
+      </h1>
+      <div className="flex gap-8 flex-wrap border-2 border-red-600">
+        {menuData?.map((pizza) => (
+          <MenuItem key={pizza.id} {...pizza} />
+        ))}
+      </div>
     </div>
   );
 }

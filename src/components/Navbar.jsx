@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
+import { Link, NavLink } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 const links = [
   { title: 'Home', route: 'home', id: 1 },
   { title: 'About', route: 'home', id: 2 },
   { title: 'Menu', route: 'menu', id: 3 },
-  { title: 'Cart', route: 'cart', id: 4 },
+  { title: <FaShoppingCart />, route: 'cart', id: 4 },
 ];
 
 function Navbar() {
@@ -38,18 +38,26 @@ function Navbar() {
           <h1 className="text-pizzaRed text-5xl">9JA Pizza</h1>
         </div>
         <div>
-          <ul className="flex space-x-4 font-pizzaLarge2">
+          <ul className="flex space-x-4 font-pizzaLarge2 items-center">
+            <div></div>
             {links.map((link) => (
-              <NavLink
+              <Link
                 to={link.route}
                 key={link.id}
                 onMouseEnter={() => handleSetHover(link.title)}
                 onMouseLeave={() => setHoverTab('')}
-                className={`${hoverTab && hoverTab === link.title ? 'text-pizzaRed' : activeTab && activeTab === link.title ? 'text-pizzaRed' : 'text-white'} text-xl transition duration-500 ease-in-out`}
+                className={`${hoverTab && hoverTab === link.title ? 'text-pizzaRed' : activeTab && activeTab === link.title ? 'text-pizzaRed' : 'text-white'} text-xl transition duration-500 ease-in-out relative`}
                 onClick={() => handleSetActive(link.title)}
               >
+                {link.id === 4 && (
+                  <p
+                    className={`${hoverTab && hoverTab === link.title ? 'text-white' : activeTab && activeTab === link.title ? 'text-white' : 'text-white'} absolute -top-3 -right-4 text-sm bg-pizzaRed rounded-[50%] w-5 h-5 flex items-center justify-center p-[4px] hover:text-white`}
+                  >
+                    3
+                  </p>
+                )}
                 {link.title}
-              </NavLink>
+              </Link>
             ))}
           </ul>
         </div>

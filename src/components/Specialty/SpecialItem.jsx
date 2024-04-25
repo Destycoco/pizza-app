@@ -28,7 +28,12 @@ function SpecialItem({ header, text, image }) {
       <p className="w-[90%] ">
         {showFullText ? handleFormat(text, 100) : text}
       </p>
-      <Button onClick={handleSetText} type={'primary'} textColor={'pizzaRed'}>
+      <Button
+        onClick={handleSetText}
+        type={'primary'}
+        baseColor={'pizzaRed'}
+        bgColor={'pizzaRed'}
+      >
         {showFullText ? 'Read more' : 'Read less'}
       </Button>
     </div>
