@@ -13,8 +13,10 @@ function MenuItem({ id, imageUrl, ingredients, name, soldOut, unitPrice }) {
   const handleAddToCart = () => {
     const newCart = {
       pizzaId: id,
+      imageUrl,
       name,
       quantity: 1,
+      ingredients,
       unitPrice,
       totalPrice: unitPrice * 1,
     };
