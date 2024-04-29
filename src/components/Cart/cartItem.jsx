@@ -19,9 +19,11 @@ function CartItem({
           <img src={imageUrl} alt="pizza image" className="w-[100%] h-[100%]" />
         </div>
         <div className="text-xs space-y-1 basis-[50%]">
-          <p className="font-bold text-sm">{name}</p>
+          <p className="font-semibold text-sm">{name}</p>
           <p>{ingredients.join(', ')}</p>
-          <button>Remove</button>
+          <button className="text-red-400 hover:text-red-600 hover:font-bold">
+            Remove
+          </button>
         </div>
       </div>
       <div className="flex items-center gap-2 basis-[20%]">
