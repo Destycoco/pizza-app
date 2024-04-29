@@ -14,7 +14,11 @@ function PizzaPair({ header, title, text, image }) {
           {title}
         </h3>
         <p className="text-white w-[70%] text-xs font-normal m-auto">{text}</p>
-        <Button type="primary" onClick={() => navigate('/menu')}>
+        <Button
+          type="primary"
+          hoverColor={'pizzaOrange'}
+          onClick={() => navigate('/menu')}
+        >
           Order Now
         </Button>
       </div>

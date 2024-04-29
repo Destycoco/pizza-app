@@ -32,7 +32,8 @@ function SpecialItem({ header, text, image }) {
         onClick={handleSetText}
         type={'primary'}
         baseColor={'pizzaRed'}
-        bgColor={'pizzaRed'}
+        hoverColor={'pizzaRed'}
+        // bgColor={'pizzaRed'}
       >
         {showFullText ? 'Read more' : 'Read less'}
       </Button>

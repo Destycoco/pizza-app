@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { formatCurrency } from '../../utils';
-import { addToCart } from '../../features/cartSlice';
+import { addToCart, deleteItem } from '../../features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ToggleAmount from './ToggleAmount';
 
@@ -19,6 +19,9 @@ function MenuItem({ id, imageUrl, ingredients, name, soldOut, unitPrice }) {
       totalPrice: unitPrice * 1,
     };
     dispatch(addToCart(newCart));
+  };
+  const handleDeletePizza = (pizza) => {
+    dispatch(deleteItem(pizza));
   };
   return (
     <div className="basis-[23%] flex flex-col justify-between shadow-lg relative">
@@ -41,7 +44,12 @@ function MenuItem({ id, imageUrl, ingredients, name, soldOut, unitPrice }) {
       </div>
 
       {isAdded && !soldOut ? (
-        <ToggleAmount isAdded={isAdded} key={isAdded.pizzaId} />
+        <ToggleAmount
+          isAdded={isAdded}
+          key={id}
+          id={id}
+          handleDeletePizza={handleDeletePizza}
+        />
       ) : (
         <button
           className={`${soldOut ? 'grayscale' : ''} rounded-md w-[100%] py-2 px-3 bg-pizzaOrange text-white hover:bg-pizzaRed `}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 const links = [
   { title: 'Home', route: 'home', id: 1 },
   { title: 'About', route: 'home', id: 2 },
@@ -9,6 +10,9 @@ const links = [
 ];
 
 function Navbar() {
+  const cartLength = useSelector((store) =>
+    store.cart.cart.reduce((acc, cur) => acc + cur.quantity, 0),
+  );
   const [activeTab, setActiveTab] = useState('Home');
   const [hoverTab, setHoverTab] = useState('');
 
@@ -53,7 +57,7 @@ function Navbar() {
                   <p
                     className={`${hoverTab && hoverTab === link.title ? 'text-white' : activeTab && activeTab === link.title ? 'text-white' : 'text-white'} absolute -top-3 -right-4 text-sm bg-pizzaRed rounded-[50%] w-5 h-5 flex items-center justify-center p-[4px] hover:text-white`}
                   >
-                    3
+                    {cartLength}
                   </p>
                 )}
                 {link.title}
