@@ -8,9 +8,11 @@ function Button({
   hoverColor = '',
 }) {
   const style = {
-    base: `text-${baseColor} font-bold px-4 py-2 border-2 border-${bgColor} rounded-full bg-${bgColor}`,
+    base: `text-${baseColor} font-bold px-4 py-2 border-2 rounded-full bg-${bgColor}`,
     btnType:
-      type === 'primary' ? ` hover:bg-${hoverColor} hover:text-white ` : '',
+      type === 'primary'
+        ? ` hover:bg-${hoverColor} hover:border-2 hover:border-${hoverColor} hover:text-white `
+        : '',
     // primary: ""
   };
   if (type === 'primary')

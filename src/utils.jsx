@@ -25,6 +25,24 @@ export const useGetPizza = () => {
   return { menu, error, isLoading, getPizzaMenu };
 };
 
+export const createNewOrder = async (newOrder) => {
+  try {
+    const res = await axios.post(`${URL}/order`, newOrder);
+    return res.data.data;
+  } catch (error) {
+    console.error('Error creating new order:', error);
+    throw error; // Re-throw error for caller to handle
+  }
+};
+export const getNewOrder = async (id) => {
+  try {
+    const res = await axios.get(`${URL}/order/${id}`);
+    return res.data.data;
+  } catch (error) {
+    console.error('Error creating new order:', error);
+    throw error;
+  }
+};
 export const formatCurrency = (cur) => {
   return new Intl.NumberFormat('en', {
     style: 'currency',

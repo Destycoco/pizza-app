@@ -10,9 +10,7 @@ const links = [
 ];
 
 function Navbar() {
-  const cartLength = useSelector((store) =>
-    store.cart.cart.reduce((acc, cur) => acc + cur.quantity, 0),
-  );
+  const cartLength = useSelector((store) => store.cart.cart.length);
   const [activeTab, setActiveTab] = useState('Home');
   const [hoverTab, setHoverTab] = useState('');
 

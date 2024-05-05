@@ -10,6 +10,7 @@ const initialState = {
     //   totalPrice: 23,
     // },
   ],
+  priority: false,
 };
 
 const cartSlice = createSlice({
@@ -27,6 +28,7 @@ const cartSlice = createSlice({
         (item) => item.pizzaId === action.payload,
       );
       currentPizza.quantity++;
+      currentPizza.totalPrice = currentPizza.unitPrice * currentPizza.quantity;
     },
     decreaseItem: (state, action) => {
       const index = state.cart.findIndex(
@@ -37,10 +39,19 @@ const cartSlice = createSlice({
       if (currentPizza.quantity < 1) {
         state.cart.splice(index, 1);
       }
+      currentPizza.totalPrice = currentPizza.unitPrice * currentPizza.quantity;
       // currentPizza.quantity--;
+    },
+    setPriority: (state, action) => {
+      state.priority = action.payload;
     },
   },
 });
-export const { addToCart, deleteItem, increaseItem, decreaseItem } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  deleteItem,
+  increaseItem,
+  decreaseItem,
+  setPriority,
+} = cartSlice.actions;
 export default cartSlice.reducer;
