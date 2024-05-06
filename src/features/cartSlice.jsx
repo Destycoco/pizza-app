@@ -42,6 +42,9 @@ const cartSlice = createSlice({
       currentPizza.totalPrice = currentPizza.unitPrice * currentPizza.quantity;
       // currentPizza.quantity--;
     },
+    clearCart: (state) => {
+      state.cart.splice(0, `${state.cart.length}`);
+    },
     setPriority: (state, action) => {
       state.priority = action.payload;
     },
@@ -53,5 +56,6 @@ export const {
   increaseItem,
   decreaseItem,
   setPriority,
+  clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

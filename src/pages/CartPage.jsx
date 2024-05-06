@@ -2,9 +2,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BiArrowBack } from 'react-icons/bi';
 import { useNavigate } from 'react-router';
 import { formatCurrency } from '../utils';
-import { setPriority } from '../features/cartSlice';
+import { clearCart, setPriority } from '../features/cartSlice';
 import { useEffect, useState, useMemo } from 'react';
 import CartItem from '../components/Cart/cartItem';
+import Button from '../components/Button';
+
 const promoCodes = ['Destiny500', 'Pizza500', 'Order500'];
 
 function CartPage() {
@@ -71,7 +73,18 @@ function CartPage() {
               {cart.map((pizza) => (
                 <CartItem key={pizza.pizzaId} {...pizza} />
               ))}
+              <div>
+                <Button
+                  type={'primary'}
+                  bgColor="pizzaOrange"
+                  hoverColor="pizzaRed"
+                  onClick={() => dispatch(clearCart())}
+                >
+                  Clear cart
+                </Button>
+              </div>
             </div>
+
             <div className="flex items-center gap-1 text-green-600 cursor-pointer hover:text-green-800  w-[35%]">
               <div>
                 <BiArrowBack className="" />
@@ -90,6 +103,12 @@ function CartPage() {
               Your Cart Is Currently Empty, Go Back To The Menu To Start
               Shopping
             </h1>
+            <button
+              className="text-green-600"
+              onClick={() => navigate('/menu')}
+            >
+              &larr; Back to menu
+            </button>
           </div>
         )}
       </div>

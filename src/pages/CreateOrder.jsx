@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPriority } from '../features/cartSlice';
+import { clearCart, setPriority } from '../features/cartSlice';
 import Button from '../components/Button';
 import { createNewOrder, formatCurrency } from '../utils';
 import { useNavigate } from 'react-router';
@@ -8,9 +8,8 @@ import { useNavigate } from 'react-router';
 function CreateOrder() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const isValidNumber = (number) => /^\d{11}$/.test(number);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     customer: '',
     phone: '',
@@ -65,7 +64,7 @@ function CreateOrder() {
 
     setErrors(newErrors);
 
-    if (Object.values(newErrors).some((error) => !!error)) {
+    if (Object.values(newErrors).some((error) => error)) {
       return;
     }
 
@@ -78,17 +77,24 @@ function CreateOrder() {
     };
 
     try {
+      setIsLoading(true);
       const newOrder = await createNewOrder(order);
       navigate(`/order/${newOrder.id}`);
     } catch (error) {
       console.error('Error submitting order:', error);
       // You might want to handle this error, e.g., show a message to the user
+    } finally {
+      setIsLoading(false);
     }
+    dispatch(clearCart());
   };
 
   return (
     <div className=" border-2 border-red-800 flex">
-      <div className="basis-[50%] border-2 border-green-800 py-8 ">
+      <div className="basis-[50%] border-2 border-green-800 py-4 ">
+        <h2 className="text-center font-semibold text-2xl font-pizzaLarge2">
+          Ready to Order, Let&apos;s go
+        </h2>
         <div className="w-[70%] m-auto border-2 border-red-700 py-8">
           <form
             action=""
@@ -158,7 +164,9 @@ function CreateOrder() {
               bgColor="pizzaOrange"
               hoverColor={'pizzaRed'}
             >
-              Order Now {formatCurrency(totalPrice)}
+              {isLoading
+                ? 'Placing Order...'
+                : `Order Now ${formatCurrency(totalPrice)}`}
             </Button>
           </form>
         </div>
