@@ -49,3 +49,18 @@ export const formatCurrency = (cur) => {
     currency: 'USD',
   }).format(cur);
 };
+export const getTimeRemaining = (deliveryDate) => {
+  const deliveryMinutes = new Date(deliveryDate).getTime() / 60000;
+  const currentMinutes = new Date().getTime() / 60000;
+  const timeRemaining = deliveryMinutes - currentMinutes;
+  return timeRemaining;
+};
+export const formatDate = (date) => {
+  return new Intl.DateTimeFormat('en', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  }).format(date);
+};

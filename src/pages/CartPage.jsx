@@ -69,32 +69,36 @@ function CartPage() {
               <p className="basis-[20%] text-center font-semibold">Price</p>
               <p className="basis-[20%] text-right font-semibold">Total</p>
             </div>
-            <div className="flex flex-col gap-8 mb-4 h-[500px] overflow-y-auto">
+            <div className="flex flex-col gap-8 mb-4 max-h-[500px] overflow-y-auto">
               {cart.map((pizza) => (
                 <CartItem key={pizza.pizzaId} {...pizza} />
               ))}
-              <div>
-                <Button
-                  type={'primary'}
-                  bgColor="pizzaOrange"
-                  hoverColor="pizzaRed"
-                  onClick={() => dispatch(clearCart())}
-                >
-                  Clear cart
-                </Button>
-              </div>
+
+              {/* <Button
+                type={'primary'}
+                bgColor="pizzaOrange"
+                hoverColor="pizzaRed"
+                onClick={() => dispatch(clearCart())}
+              >
+                Clear cart
+              </Button> */}
             </div>
 
-            <div className="flex items-center gap-1 text-green-600 cursor-pointer hover:text-green-800  w-[35%]">
-              <div>
-                <BiArrowBack className="" />
-              </div>
+            <div className="flex items-center gap-1 justify-between text-green-600 cursor-pointer hover:text-green-800  w-[100%] border-2">
               <button
                 className="flex items-center font-semibold"
                 onClick={() => navigate('/menu')}
               >
-                Continue Shopping
+                &larr; Continue Shopping
               </button>
+              <Button
+                type={'primary'}
+                bgColor="pizzaOrange"
+                hoverColor="pizzaRed"
+                onClick={() => dispatch(clearCart())}
+              >
+                Clear cart
+              </Button>
             </div>
           </>
         ) : (

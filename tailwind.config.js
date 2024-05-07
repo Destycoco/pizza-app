@@ -9,6 +9,7 @@ export default {
         pizzaText: ['Denk One', 'sans-serif'],
         pizzaIngrd: ['Bad Script', 'cursive'],
         pizzaLarge2: ['Chewy', 'system-ui'],
+        pizzaMukta: ['Mukta', 'sans-serif'],
       },
       colors: {
         pizzaRed: '#A10702',

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, setPriority } from '../features/cartSlice';
 import Button from '../components/Button';
@@ -6,6 +6,7 @@ import { createNewOrder, formatCurrency } from '../utils';
 import { useNavigate } from 'react-router';
 
 function CreateOrder() {
+  const customerName = useRef(null); // Initialize with null
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isValidNumber = (number) => /^\d{11}$/.test(number);
@@ -34,6 +35,13 @@ function CreateOrder() {
     [priority, totalCartPrice],
   );
   const totalPrice = totalCartPrice + priorityPrice;
+
+  useEffect(() => {
+    // Focus on customerName input when component is rendered
+    if (customerName.current) {
+      customerName.current.focus();
+    }
+  }, []); // Empty dependency array ensures it only runs once, similar to componentDidMount
 
   useEffect(() => {
     setErrors({
@@ -87,15 +95,16 @@ function CreateOrder() {
       setIsLoading(false);
     }
     dispatch(clearCart());
+    dispatch(setPriority(false));
   };
 
   return (
-    <div className=" border-2 border-red-800 flex">
-      <div className="basis-[50%] border-2 border-green-800 py-4 ">
-        <h2 className="text-center font-semibold text-2xl font-pizzaLarge2">
-          Ready to Order, Let&apos;s go
-        </h2>
-        <div className="w-[70%] m-auto border-2 border-red-700 py-8">
+    <div className=" flex ">
+      <div className="basis-[50%] flex items-center  py-10 bg-[#f0f1f3]">
+        <div className="w-[70%] m-auto px-8 py-4  bg-[#fff] rounded-md">
+          <h2 className=" font-semibold text-2xl font-pizzaMukta text-pizzaRed mb-3">
+            Ready to Order, Let&apos;s go!
+          </h2>
           <form
             action=""
             className="space-y-4"
@@ -109,6 +118,7 @@ function CreateOrder() {
                 type="text"
                 id="customer"
                 name="customer"
+                ref={customerName}
                 onChange={(e) => handleSetCredential(e)}
                 className={`${errors.customer ? 'border-2 border-red-600' : ''} outline-none border-2 focus:border-green-800 py-2 rounded-md px-2`}
               />
@@ -157,7 +167,12 @@ function CreateOrder() {
                 onChange={(e) => dispatch(setPriority(e.target.checked))}
                 className="rounded-sm w-4 h-4 cursor-pointer accent-pizzaOrange"
               />
-              <label htmlFor="priority">Priority</label>
+              <label
+                htmlFor="priority"
+                className="text-green-600 font-semibold"
+              >
+                Priority
+              </label>
             </div>
             <Button
               type="primary"
@@ -171,7 +186,7 @@ function CreateOrder() {
           </form>
         </div>
       </div>
-      <div className="basis-[50%] border-2 border-red-800 "></div>
+      <div className="basis-[50%] bg-[url('manPizza.jpg')] bg-cover"></div>
     </div>
   );
 }
