@@ -18,11 +18,11 @@ function MenuPage() {
       </div>
     );
   return (
-    <div className="w-[80%] m-auto  py-10">
+    <div className="w-[92%] m-auto  py-10">
       <h1 className="text-center font-pizzaHeader font-bold text-3xl mb-6">
         OUR MENU
       </h1>
-      <div className="flex gap-8 flex-wrap ">
+      <div className="flex gap-6 flex-wrap ">
         {menuData?.map((pizza) => (
           <MenuItem key={pizza.id} {...pizza} />
         ))}
